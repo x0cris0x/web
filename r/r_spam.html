@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Dataset Spam</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1688d9e1630bd0bcb1ec498477fd8fb7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Página principal</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#r"> 
+<span class="menu-text">R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#python"> 
+<span class="menu-text">Python</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#power-bi"> 
+<span class="menu-text">Power BI</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#aplicaciones-web"> 
+<span class="menu-text">Aplicaciones Web</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html#aplicaciones-moviles"> 
+<span class="menu-text">Aplicaciones Móviles</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#analisis-del-dataset-de-spam" id="toc-analisis-del-dataset-de-spam" class="nav-link active" data-scroll-target="#analisis-del-dataset-de-spam"><strong>Analisis del dataset de spam</strong></a>
+  <ul class="collapse">
+  <li><a href="#cargar-las-librerias-y-el-dataset" id="toc-cargar-las-librerias-y-el-dataset" class="nav-link" data-scroll-target="#cargar-las-librerias-y-el-dataset">Cargar las librerias y el dataset</a></li>
+  <li><a href="#modelado" id="toc-modelado" class="nav-link" data-scroll-target="#modelado">Modelado</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Dataset Spam</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="analisis-del-dataset-de-spam" class="level1">
+<h1><strong>Analisis del dataset de spam</strong></h1>
+<p>El dataset de spam es una recopilado en los laboratorios de Hewlett-Packard, clasifica 4601 correos electrónicos como spam o no spam. Además de esta etiqueta de clase, existen 57 variables que indican la frecuencia de ciertas palabras y caracteres en el correo electrónico.</p>
+<p>El dataset contiene 2788 correos “no spam” y 1813 como “spam”. <a href="https://archive.ics.uci.edu/dataset/94/spambase">Mas información</a></p>
+<section id="cargar-las-librerias-y-el-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="cargar-las-librerias-y-el-dataset">Cargar las librerias y el dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cargar el dataset dentro de la variable datos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(spam)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>datos  <span class="ot">=</span> spam</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Información del dataset</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(datos) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4601   58</code></pre>
+</div>
+</div>
+<p>El dataset tiene 4601 observaciones y 58 variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   4601 obs. of  58 variables:
+ $ make             : num  0 0.21 0.06 0 0 0 0 0 0.15 0.06 ...
+ $ address          : num  0.64 0.28 0 0 0 0 0 0 0 0.12 ...
+ $ all              : num  0.64 0.5 0.71 0 0 0 0 0 0.46 0.77 ...
+ $ num3d            : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ our              : num  0.32 0.14 1.23 0.63 0.63 1.85 1.92 1.88 0.61 0.19 ...
+ $ over             : num  0 0.28 0.19 0 0 0 0 0 0 0.32 ...
+ $ remove           : num  0 0.21 0.19 0.31 0.31 0 0 0 0.3 0.38 ...
+ $ internet         : num  0 0.07 0.12 0.63 0.63 1.85 0 1.88 0 0 ...
+ $ order            : num  0 0 0.64 0.31 0.31 0 0 0 0.92 0.06 ...
+ $ mail             : num  0 0.94 0.25 0.63 0.63 0 0.64 0 0.76 0 ...
+ $ receive          : num  0 0.21 0.38 0.31 0.31 0 0.96 0 0.76 0 ...
+ $ will             : num  0.64 0.79 0.45 0.31 0.31 0 1.28 0 0.92 0.64 ...
+ $ people           : num  0 0.65 0.12 0.31 0.31 0 0 0 0 0.25 ...
+ $ report           : num  0 0.21 0 0 0 0 0 0 0 0 ...
+ $ addresses        : num  0 0.14 1.75 0 0 0 0 0 0 0.12 ...
+ $ free             : num  0.32 0.14 0.06 0.31 0.31 0 0.96 0 0 0 ...
+ $ business         : num  0 0.07 0.06 0 0 0 0 0 0 0 ...
+ $ email            : num  1.29 0.28 1.03 0 0 0 0.32 0 0.15 0.12 ...
+ $ you              : num  1.93 3.47 1.36 3.18 3.18 0 3.85 0 1.23 1.67 ...
+ $ credit           : num  0 0 0.32 0 0 0 0 0 3.53 0.06 ...
+ $ your             : num  0.96 1.59 0.51 0.31 0.31 0 0.64 0 2 0.71 ...
+ $ font             : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ num000           : num  0 0.43 1.16 0 0 0 0 0 0 0.19 ...
+ $ money            : num  0 0.43 0.06 0 0 0 0 0 0.15 0 ...
+ $ hp               : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ hpl              : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ george           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ num650           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ lab              : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ labs             : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ telnet           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ num857           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ data             : num  0 0 0 0 0 0 0 0 0.15 0 ...
+ $ num415           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ num85            : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ technology       : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ num1999          : num  0 0.07 0 0 0 0 0 0 0 0 ...
+ $ parts            : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ pm               : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ direct           : num  0 0 0.06 0 0 0 0 0 0 0 ...
+ $ cs               : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ meeting          : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ original         : num  0 0 0.12 0 0 0 0 0 0.3 0 ...
+ $ project          : num  0 0 0 0 0 0 0 0 0 0.06 ...
+ $ re               : num  0 0 0.06 0 0 0 0 0 0 0 ...
+ $ edu              : num  0 0 0.06 0 0 0 0 0 0 0 ...
+ $ table            : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ conference       : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ charSemicolon    : num  0 0 0.01 0 0 0 0 0 0 0.04 ...
+ $ charRoundbracket : num  0 0.132 0.143 0.137 0.135 0.223 0.054 0.206 0.271 0.03 ...
+ $ charSquarebracket: num  0 0 0 0 0 0 0 0 0 0 ...
+ $ charExclamation  : num  0.778 0.372 0.276 0.137 0.135 0 0.164 0 0.181 0.244 ...
+ $ charDollar       : num  0 0.18 0.184 0 0 0 0.054 0 0.203 0.081 ...
+ $ charHash         : num  0 0.048 0.01 0 0 0 0 0 0.022 0 ...
+ $ capitalAve       : num  3.76 5.11 9.82 3.54 3.54 ...
+ $ capitalLong      : num  61 101 485 40 40 15 4 11 445 43 ...
+ $ capitalTotal     : num  278 1028 2259 191 191 ...
+ $ type             : Factor w/ 2 levels "nonspam","spam": 2 2 2 2 2 2 2 2 2 2 ...</code></pre>
+</div>
+</div>
+<p>Se observa que todos las variables son numéricas, excepto type que es categórica, es la variable a analizar</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(datos)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             make           address               all             num3d 
+                0                 0                 0                 0 
+              our              over            remove          internet 
+                0                 0                 0                 0 
+            order              mail           receive              will 
+                0                 0                 0                 0 
+           people            report         addresses              free 
+                0                 0                 0                 0 
+         business             email               you            credit 
+                0                 0                 0                 0 
+             your              font            num000             money 
+                0                 0                 0                 0 
+               hp               hpl            george            num650 
+                0                 0                 0                 0 
+              lab              labs            telnet            num857 
+                0                 0                 0                 0 
+             data            num415             num85        technology 
+                0                 0                 0                 0 
+          num1999             parts                pm            direct 
+                0                 0                 0                 0 
+               cs           meeting          original           project 
+                0                 0                 0                 0 
+               re               edu             table        conference 
+                0                 0                 0                 0 
+    charSemicolon  charRoundbracket charSquarebracket   charExclamation 
+                0                 0                 0                 0 
+       charDollar          charHash        capitalAve       capitalLong 
+                0                 0                 0                 0 
+     capitalTotal              type 
+                0                 0 </code></pre>
+</div>
+</div>
+<p>El dataset no contiene valores faltantes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>type) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+nonspam    spam 
+   2788    1813 </code></pre>
+</div>
+</div>
+<p>Existe 2788 correos “no spam” y 1813 con spam</p>
+</section>
+<section id="modelado" class="level2">
+<h2 class="anchored" data-anchor-id="modelado">Modelado</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(datos<span class="sc">$</span>type, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>trainData <span class="ot">&lt;-</span> datos[train, ] </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>testData  <span class="ot">&lt;-</span> datos[<span class="sc">-</span>train, ] </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Se divide el dataset en 80% train y 20% test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>preProcValues <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(trainData[,<span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>], <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>)) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>trainTransformed <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, trainData[, <span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>]) </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>testTransformed  <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, testData[, <span class="dv">1</span><span class="sc">:</span><span class="dv">57</span>]) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Se realiza un escalado y centrado de las variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>trainTransformed<span class="sc">$</span>type <span class="ot">&lt;-</span> trainData<span class="sc">$</span>type </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>testTransformed<span class="sc">$</span>type  <span class="ot">&lt;-</span> testData<span class="sc">$</span>type </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Reconstruimos el datasets con la variable objetivo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">5</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Realizamos un cross-validation para evitar el sobreajuste</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rf"</span>, <span class="st">"svmRadial"</span>, <span class="st">"knn"</span>, <span class="st">"gbm"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Los modelos que se van a entrenar son: random forest, svmRadial, k-Nearest Neighbour y Generalized Boosted Models</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">lapply</span>(methods, <span class="cf">function</span>(m) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">train</span>(type <span class="sc">~</span> .,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> trainTransformed,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">method =</span> m,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">trControl =</span> ctrl, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">tuneLength =</span> <span class="dv">5</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  }) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2790            -nan     0.1000    0.0294
+     2        1.2238            -nan     0.1000    0.0274
+     3        1.1765            -nan     0.1000    0.0222
+     4        1.1342            -nan     0.1000    0.0206
+     5        1.0970            -nan     0.1000    0.0174
+     6        1.0630            -nan     0.1000    0.0169
+     7        1.0297            -nan     0.1000    0.0163
+     8        1.0014            -nan     0.1000    0.0140
+     9        0.9745            -nan     0.1000    0.0119
+    10        0.9489            -nan     0.1000    0.0114
+    20        0.7761            -nan     0.1000    0.0071
+    40        0.5933            -nan     0.1000    0.0025
+    60        0.5080            -nan     0.1000    0.0009
+    80        0.4534            -nan     0.1000    0.0004
+   100        0.4184            -nan     0.1000    0.0011
+   120        0.3923            -nan     0.1000    0.0000
+   140        0.3734            -nan     0.1000    0.0003
+   160        0.3601            -nan     0.1000    0.0000
+   180        0.3491            -nan     0.1000   -0.0001
+   200        0.3377            -nan     0.1000    0.0000
+   220        0.3298            -nan     0.1000    0.0001
+   240        0.3215            -nan     0.1000   -0.0002
+   250        0.3196            -nan     0.1000   -0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2619            -nan     0.1000    0.0373
+     2        1.1822            -nan     0.1000    0.0387
+     3        1.1239            -nan     0.1000    0.0289
+     4        1.0637            -nan     0.1000    0.0296
+     5        1.0167            -nan     0.1000    0.0226
+     6        0.9745            -nan     0.1000    0.0204
+     7        0.9326            -nan     0.1000    0.0202
+     8        0.8934            -nan     0.1000    0.0181
+     9        0.8631            -nan     0.1000    0.0140
+    10        0.8368            -nan     0.1000    0.0123
+    20        0.6315            -nan     0.1000    0.0064
+    40        0.4537            -nan     0.1000    0.0024
+    60        0.3860            -nan     0.1000   -0.0001
+    80        0.3491            -nan     0.1000    0.0004
+   100        0.3251            -nan     0.1000   -0.0002
+   120        0.3075            -nan     0.1000   -0.0003
+   140        0.2925            -nan     0.1000   -0.0000
+   160        0.2792            -nan     0.1000   -0.0002
+   180        0.2669            -nan     0.1000   -0.0003
+   200        0.2587            -nan     0.1000   -0.0001
+   220        0.2521            -nan     0.1000   -0.0003
+   240        0.2445            -nan     0.1000    0.0000
+   250        0.2414            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2380            -nan     0.1000    0.0512
+     2        1.1593            -nan     0.1000    0.0381
+     3        1.0842            -nan     0.1000    0.0359
+     4        1.0260            -nan     0.1000    0.0277
+     5        0.9706            -nan     0.1000    0.0280
+     6        0.9253            -nan     0.1000    0.0212
+     7        0.8840            -nan     0.1000    0.0191
+     8        0.8463            -nan     0.1000    0.0187
+     9        0.8133            -nan     0.1000    0.0156
+    10        0.7818            -nan     0.1000    0.0155
+    20        0.5737            -nan     0.1000    0.0071
+    40        0.4007            -nan     0.1000    0.0016
+    60        0.3349            -nan     0.1000    0.0005
+    80        0.3019            -nan     0.1000    0.0000
+   100        0.2827            -nan     0.1000   -0.0003
+   120        0.2660            -nan     0.1000   -0.0005
+   140        0.2504            -nan     0.1000   -0.0001
+   160        0.2385            -nan     0.1000   -0.0001
+   180        0.2277            -nan     0.1000    0.0002
+   200        0.2200            -nan     0.1000   -0.0004
+   220        0.2102            -nan     0.1000   -0.0004
+   240        0.2024            -nan     0.1000   -0.0001
+   250        0.1985            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2384            -nan     0.1000    0.0501
+     2        1.1431            -nan     0.1000    0.0459
+     3        1.0677            -nan     0.1000    0.0382
+     4        1.0049            -nan     0.1000    0.0312
+     5        0.9507            -nan     0.1000    0.0258
+     6        0.8981            -nan     0.1000    0.0265
+     7        0.8506            -nan     0.1000    0.0222
+     8        0.8133            -nan     0.1000    0.0176
+     9        0.7768            -nan     0.1000    0.0175
+    10        0.7474            -nan     0.1000    0.0132
+    20        0.5313            -nan     0.1000    0.0094
+    40        0.3736            -nan     0.1000    0.0010
+    60        0.3126            -nan     0.1000    0.0003
+    80        0.2768            -nan     0.1000    0.0005
+   100        0.2535            -nan     0.1000   -0.0002
+   120        0.2382            -nan     0.1000   -0.0002
+   140        0.2240            -nan     0.1000   -0.0003
+   160        0.2094            -nan     0.1000   -0.0003
+   180        0.1960            -nan     0.1000   -0.0001
+   200        0.1868            -nan     0.1000   -0.0002
+   220        0.1774            -nan     0.1000   -0.0001
+   240        0.1665            -nan     0.1000   -0.0002
+   250        0.1614            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2328            -nan     0.1000    0.0514
+     2        1.1327            -nan     0.1000    0.0501
+     3        1.0519            -nan     0.1000    0.0388
+     4        0.9835            -nan     0.1000    0.0317
+     5        0.9245            -nan     0.1000    0.0275
+     6        0.8708            -nan     0.1000    0.0251
+     7        0.8270            -nan     0.1000    0.0209
+     8        0.7870            -nan     0.1000    0.0194
+     9        0.7499            -nan     0.1000    0.0180
+    10        0.7175            -nan     0.1000    0.0143
+    20        0.5060            -nan     0.1000    0.0093
+    40        0.3435            -nan     0.1000    0.0012
+    60        0.2822            -nan     0.1000    0.0001
+    80        0.2542            -nan     0.1000    0.0000
+   100        0.2328            -nan     0.1000   -0.0001
+   120        0.2132            -nan     0.1000   -0.0004
+   140        0.1963            -nan     0.1000    0.0001
+   160        0.1818            -nan     0.1000   -0.0001
+   180        0.1714            -nan     0.1000   -0.0003
+   200        0.1590            -nan     0.1000   -0.0003
+   220        0.1496            -nan     0.1000   -0.0003
+   240        0.1415            -nan     0.1000   -0.0002
+   250        0.1375            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2797            -nan     0.1000    0.0295
+     2        1.2225            -nan     0.1000    0.0289
+     3        1.1766            -nan     0.1000    0.0211
+     4        1.1304            -nan     0.1000    0.0214
+     5        1.0944            -nan     0.1000    0.0174
+     6        1.0598            -nan     0.1000    0.0167
+     7        1.0287            -nan     0.1000    0.0155
+     8        1.0014            -nan     0.1000    0.0133
+     9        0.9742            -nan     0.1000    0.0135
+    10        0.9494            -nan     0.1000    0.0119
+    20        0.7735            -nan     0.1000    0.0069
+    40        0.5909            -nan     0.1000    0.0024
+    60        0.4997            -nan     0.1000    0.0010
+    80        0.4440            -nan     0.1000    0.0006
+   100        0.4043            -nan     0.1000    0.0004
+   120        0.3767            -nan     0.1000   -0.0002
+   140        0.3564            -nan     0.1000    0.0005
+   160        0.3423            -nan     0.1000   -0.0004
+   180        0.3290            -nan     0.1000    0.0005
+   200        0.3209            -nan     0.1000   -0.0004
+   220        0.3129            -nan     0.1000   -0.0000
+   240        0.3046            -nan     0.1000    0.0000
+   250        0.3015            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2501            -nan     0.1000    0.0452
+     2        1.1788            -nan     0.1000    0.0338
+     3        1.1200            -nan     0.1000    0.0281
+     4        1.0632            -nan     0.1000    0.0285
+     5        1.0169            -nan     0.1000    0.0210
+     6        0.9738            -nan     0.1000    0.0209
+     7        0.9321            -nan     0.1000    0.0204
+     8        0.8985            -nan     0.1000    0.0167
+     9        0.8665            -nan     0.1000    0.0151
+    10        0.8363            -nan     0.1000    0.0138
+    20        0.6189            -nan     0.1000    0.0088
+    40        0.4503            -nan     0.1000    0.0026
+    60        0.3736            -nan     0.1000    0.0009
+    80        0.3315            -nan     0.1000    0.0003
+   100        0.3062            -nan     0.1000    0.0001
+   120        0.2894            -nan     0.1000   -0.0003
+   140        0.2771            -nan     0.1000   -0.0002
+   160        0.2624            -nan     0.1000   -0.0001
+   180        0.2539            -nan     0.1000   -0.0002
+   200        0.2454            -nan     0.1000    0.0000
+   220        0.2388            -nan     0.1000   -0.0001
+   240        0.2302            -nan     0.1000   -0.0002
+   250        0.2266            -nan     0.1000   -0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2464            -nan     0.1000    0.0489
+     2        1.1576            -nan     0.1000    0.0435
+     3        1.0883            -nan     0.1000    0.0338
+     4        1.0233            -nan     0.1000    0.0325
+     5        0.9700            -nan     0.1000    0.0258
+     6        0.9215            -nan     0.1000    0.0235
+     7        0.8812            -nan     0.1000    0.0190
+     8        0.8430            -nan     0.1000    0.0169
+     9        0.8074            -nan     0.1000    0.0174
+    10        0.7761            -nan     0.1000    0.0155
+    20        0.5647            -nan     0.1000    0.0106
+    40        0.3889            -nan     0.1000    0.0014
+    60        0.3281            -nan     0.1000    0.0002
+    80        0.2924            -nan     0.1000    0.0002
+   100        0.2679            -nan     0.1000   -0.0004
+   120        0.2501            -nan     0.1000   -0.0000
+   140        0.2368            -nan     0.1000   -0.0002
+   160        0.2256            -nan     0.1000   -0.0002
+   180        0.2155            -nan     0.1000   -0.0003
+   200        0.2055            -nan     0.1000   -0.0001
+   220        0.1963            -nan     0.1000   -0.0001
+   240        0.1883            -nan     0.1000    0.0001
+   250        0.1851            -nan     0.1000   -0.0004
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2365            -nan     0.1000    0.0500
+     2        1.1373            -nan     0.1000    0.0471
+     3        1.0613            -nan     0.1000    0.0357
+     4        0.9900            -nan     0.1000    0.0352
+     5        0.9319            -nan     0.1000    0.0283
+     6        0.8845            -nan     0.1000    0.0227
+     7        0.8417            -nan     0.1000    0.0204
+     8        0.8016            -nan     0.1000    0.0197
+     9        0.7677            -nan     0.1000    0.0159
+    10        0.7330            -nan     0.1000    0.0170
+    20        0.5216            -nan     0.1000    0.0079
+    40        0.3543            -nan     0.1000    0.0007
+    60        0.2898            -nan     0.1000    0.0005
+    80        0.2578            -nan     0.1000   -0.0001
+   100        0.2383            -nan     0.1000   -0.0001
+   120        0.2225            -nan     0.1000   -0.0004
+   140        0.2073            -nan     0.1000   -0.0003
+   160        0.1933            -nan     0.1000   -0.0004
+   180        0.1830            -nan     0.1000   -0.0004
+   200        0.1726            -nan     0.1000   -0.0001
+   220        0.1632            -nan     0.1000   -0.0002
+   240        0.1527            -nan     0.1000   -0.0001
+   250        0.1482            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2223            -nan     0.1000    0.0585
+     2        1.1319            -nan     0.1000    0.0435
+     3        1.0483            -nan     0.1000    0.0398
+     4        0.9765            -nan     0.1000    0.0343
+     5        0.9196            -nan     0.1000    0.0265
+     6        0.8667            -nan     0.1000    0.0253
+     7        0.8171            -nan     0.1000    0.0220
+     8        0.7766            -nan     0.1000    0.0190
+     9        0.7436            -nan     0.1000    0.0158
+    10        0.7119            -nan     0.1000    0.0143
+    20        0.4941            -nan     0.1000    0.0069
+    40        0.3272            -nan     0.1000    0.0027
+    60        0.2708            -nan     0.1000   -0.0003
+    80        0.2377            -nan     0.1000   -0.0002
+   100        0.2164            -nan     0.1000   -0.0003
+   120        0.1983            -nan     0.1000   -0.0002
+   140        0.1847            -nan     0.1000   -0.0003
+   160        0.1713            -nan     0.1000   -0.0003
+   180        0.1589            -nan     0.1000   -0.0005
+   200        0.1473            -nan     0.1000   -0.0002
+   220        0.1380            -nan     0.1000   -0.0001
+   240        0.1303            -nan     0.1000   -0.0004
+   250        0.1267            -nan     0.1000   -0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2823            -nan     0.1000    0.0293
+     2        1.2254            -nan     0.1000    0.0285
+     3        1.1785            -nan     0.1000    0.0229
+     4        1.1353            -nan     0.1000    0.0201
+     5        1.0995            -nan     0.1000    0.0162
+     6        1.0641            -nan     0.1000    0.0175
+     7        1.0315            -nan     0.1000    0.0151
+     8        1.0030            -nan     0.1000    0.0134
+     9        0.9767            -nan     0.1000    0.0122
+    10        0.9535            -nan     0.1000    0.0104
+    20        0.7759            -nan     0.1000    0.0061
+    40        0.5977            -nan     0.1000    0.0026
+    60        0.5040            -nan     0.1000    0.0022
+    80        0.4512            -nan     0.1000    0.0004
+   100        0.4146            -nan     0.1000    0.0002
+   120        0.3874            -nan     0.1000    0.0003
+   140        0.3655            -nan     0.1000   -0.0001
+   160        0.3498            -nan     0.1000    0.0006
+   180        0.3364            -nan     0.1000    0.0001
+   200        0.3254            -nan     0.1000    0.0000
+   220        0.3153            -nan     0.1000   -0.0001
+   240        0.3084            -nan     0.1000    0.0001
+   250        0.3037            -nan     0.1000   -0.0000
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2640            -nan     0.1000    0.0374
+     2        1.1837            -nan     0.1000    0.0396
+     3        1.1173            -nan     0.1000    0.0322
+     4        1.0651            -nan     0.1000    0.0261
+     5        1.0202            -nan     0.1000    0.0215
+     6        0.9759            -nan     0.1000    0.0211
+     7        0.9385            -nan     0.1000    0.0170
+     8        0.9014            -nan     0.1000    0.0184
+     9        0.8709            -nan     0.1000    0.0151
+    10        0.8397            -nan     0.1000    0.0148
+    20        0.6309            -nan     0.1000    0.0063
+    40        0.4512            -nan     0.1000    0.0018
+    60        0.3824            -nan     0.1000    0.0003
+    80        0.3426            -nan     0.1000    0.0003
+   100        0.3169            -nan     0.1000    0.0004
+   120        0.2964            -nan     0.1000    0.0000
+   140        0.2801            -nan     0.1000   -0.0005
+   160        0.2706            -nan     0.1000   -0.0001
+   180        0.2588            -nan     0.1000   -0.0001
+   200        0.2502            -nan     0.1000   -0.0000
+   220        0.2441            -nan     0.1000   -0.0001
+   240        0.2370            -nan     0.1000   -0.0002
+   250        0.2340            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2365            -nan     0.1000    0.0505
+     2        1.1621            -nan     0.1000    0.0365
+     3        1.0878            -nan     0.1000    0.0370
+     4        1.0272            -nan     0.1000    0.0288
+     5        0.9764            -nan     0.1000    0.0241
+     6        0.9267            -nan     0.1000    0.0246
+     7        0.8868            -nan     0.1000    0.0197
+     8        0.8455            -nan     0.1000    0.0196
+     9        0.8094            -nan     0.1000    0.0168
+    10        0.7806            -nan     0.1000    0.0135
+    20        0.5647            -nan     0.1000    0.0061
+    40        0.3954            -nan     0.1000    0.0022
+    60        0.3348            -nan     0.1000    0.0000
+    80        0.3003            -nan     0.1000    0.0000
+   100        0.2761            -nan     0.1000   -0.0001
+   120        0.2599            -nan     0.1000   -0.0003
+   140        0.2439            -nan     0.1000   -0.0004
+   160        0.2309            -nan     0.1000   -0.0001
+   180        0.2208            -nan     0.1000   -0.0001
+   200        0.2105            -nan     0.1000   -0.0000
+   220        0.2012            -nan     0.1000   -0.0002
+   240        0.1949            -nan     0.1000   -0.0002
+   250        0.1914            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2327            -nan     0.1000    0.0541
+     2        1.1402            -nan     0.1000    0.0469
+     3        1.0660            -nan     0.1000    0.0358
+     4        1.0016            -nan     0.1000    0.0304
+     5        0.9455            -nan     0.1000    0.0271
+     6        0.8908            -nan     0.1000    0.0261
+     7        0.8468            -nan     0.1000    0.0204
+     8        0.8073            -nan     0.1000    0.0183
+     9        0.7731            -nan     0.1000    0.0169
+    10        0.7402            -nan     0.1000    0.0147
+    20        0.5251            -nan     0.1000    0.0061
+    40        0.3630            -nan     0.1000    0.0021
+    60        0.3027            -nan     0.1000    0.0003
+    80        0.2688            -nan     0.1000   -0.0001
+   100        0.2484            -nan     0.1000   -0.0001
+   120        0.2310            -nan     0.1000    0.0001
+   140        0.2153            -nan     0.1000   -0.0003
+   160        0.2031            -nan     0.1000   -0.0002
+   180        0.1923            -nan     0.1000   -0.0002
+   200        0.1822            -nan     0.1000   -0.0003
+   220        0.1719            -nan     0.1000   -0.0003
+   240        0.1630            -nan     0.1000   -0.0001
+   250        0.1595            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2219            -nan     0.1000    0.0590
+     2        1.1333            -nan     0.1000    0.0436
+     3        1.0553            -nan     0.1000    0.0376
+     4        0.9928            -nan     0.1000    0.0306
+     5        0.9299            -nan     0.1000    0.0305
+     6        0.8791            -nan     0.1000    0.0232
+     7        0.8308            -nan     0.1000    0.0231
+     8        0.7891            -nan     0.1000    0.0193
+     9        0.7509            -nan     0.1000    0.0180
+    10        0.7183            -nan     0.1000    0.0155
+    20        0.4999            -nan     0.1000    0.0099
+    40        0.3382            -nan     0.1000    0.0014
+    60        0.2798            -nan     0.1000    0.0002
+    80        0.2470            -nan     0.1000    0.0001
+   100        0.2241            -nan     0.1000   -0.0002
+   120        0.2087            -nan     0.1000   -0.0001
+   140        0.1931            -nan     0.1000   -0.0003
+   160        0.1781            -nan     0.1000   -0.0004
+   180        0.1675            -nan     0.1000   -0.0005
+   200        0.1585            -nan     0.1000   -0.0003
+   220        0.1491            -nan     0.1000   -0.0003
+   240        0.1405            -nan     0.1000   -0.0004
+   250        0.1357            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2724            -nan     0.1000    0.0344
+     2        1.2136            -nan     0.1000    0.0276
+     3        1.1671            -nan     0.1000    0.0233
+     4        1.1266            -nan     0.1000    0.0194
+     5        1.0861            -nan     0.1000    0.0199
+     6        1.0521            -nan     0.1000    0.0170
+     7        1.0206            -nan     0.1000    0.0154
+     8        0.9915            -nan     0.1000    0.0143
+     9        0.9646            -nan     0.1000    0.0133
+    10        0.9399            -nan     0.1000    0.0108
+    20        0.7629            -nan     0.1000    0.0067
+    40        0.5878            -nan     0.1000    0.0023
+    60        0.4985            -nan     0.1000    0.0009
+    80        0.4421            -nan     0.1000    0.0008
+   100        0.4063            -nan     0.1000    0.0002
+   120        0.3809            -nan     0.1000   -0.0000
+   140        0.3617            -nan     0.1000    0.0001
+   160        0.3467            -nan     0.1000    0.0001
+   180        0.3348            -nan     0.1000   -0.0001
+   200        0.3247            -nan     0.1000   -0.0001
+   220        0.3156            -nan     0.1000    0.0001
+   240        0.3056            -nan     0.1000    0.0001
+   250        0.3033            -nan     0.1000   -0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2565            -nan     0.1000    0.0390
+     2        1.1715            -nan     0.1000    0.0413
+     3        1.1032            -nan     0.1000    0.0329
+     4        1.0484            -nan     0.1000    0.0262
+     5        0.9997            -nan     0.1000    0.0235
+     6        0.9585            -nan     0.1000    0.0195
+     7        0.9175            -nan     0.1000    0.0197
+     8        0.8821            -nan     0.1000    0.0170
+     9        0.8484            -nan     0.1000    0.0164
+    10        0.8175            -nan     0.1000    0.0140
+    20        0.6167            -nan     0.1000    0.0064
+    40        0.4457            -nan     0.1000    0.0019
+    60        0.3755            -nan     0.1000    0.0008
+    80        0.3369            -nan     0.1000    0.0005
+   100        0.3141            -nan     0.1000    0.0000
+   120        0.2976            -nan     0.1000    0.0003
+   140        0.2825            -nan     0.1000    0.0001
+   160        0.2708            -nan     0.1000   -0.0001
+   180        0.2624            -nan     0.1000   -0.0001
+   200        0.2536            -nan     0.1000   -0.0001
+   220        0.2449            -nan     0.1000   -0.0002
+   240        0.2387            -nan     0.1000   -0.0003
+   250        0.2359            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2287            -nan     0.1000    0.0556
+     2        1.1472            -nan     0.1000    0.0410
+     3        1.0719            -nan     0.1000    0.0371
+     4        1.0104            -nan     0.1000    0.0316
+     5        0.9589            -nan     0.1000    0.0252
+     6        0.9111            -nan     0.1000    0.0230
+     7        0.8693            -nan     0.1000    0.0208
+     8        0.8348            -nan     0.1000    0.0169
+     9        0.8005            -nan     0.1000    0.0168
+    10        0.7682            -nan     0.1000    0.0148
+    20        0.5600            -nan     0.1000    0.0102
+    40        0.3880            -nan     0.1000    0.0012
+    60        0.3237            -nan     0.1000    0.0009
+    80        0.2911            -nan     0.1000   -0.0001
+   100        0.2675            -nan     0.1000    0.0002
+   120        0.2517            -nan     0.1000   -0.0009
+   140        0.2388            -nan     0.1000   -0.0002
+   160        0.2281            -nan     0.1000    0.0003
+   180        0.2187            -nan     0.1000   -0.0002
+   200        0.2101            -nan     0.1000   -0.0003
+   220        0.1992            -nan     0.1000   -0.0002
+   240        0.1920            -nan     0.1000   -0.0001
+   250        0.1881            -nan     0.1000   -0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2345            -nan     0.1000    0.0514
+     2        1.1311            -nan     0.1000    0.0499
+     3        1.0566            -nan     0.1000    0.0356
+     4        0.9894            -nan     0.1000    0.0335
+     5        0.9333            -nan     0.1000    0.0275
+     6        0.8789            -nan     0.1000    0.0261
+     7        0.8358            -nan     0.1000    0.0206
+     8        0.7925            -nan     0.1000    0.0207
+     9        0.7578            -nan     0.1000    0.0159
+    10        0.7277            -nan     0.1000    0.0136
+    20        0.5102            -nan     0.1000    0.0096
+    40        0.3532            -nan     0.1000    0.0013
+    60        0.2899            -nan     0.1000   -0.0002
+    80        0.2584            -nan     0.1000    0.0006
+   100        0.2379            -nan     0.1000   -0.0006
+   120        0.2202            -nan     0.1000   -0.0000
+   140        0.2068            -nan     0.1000   -0.0003
+   160        0.1950            -nan     0.1000   -0.0002
+   180        0.1839            -nan     0.1000   -0.0002
+   200        0.1733            -nan     0.1000   -0.0003
+   220        0.1654            -nan     0.1000   -0.0001
+   240        0.1572            -nan     0.1000   -0.0001
+   250        0.1535            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2252            -nan     0.1000    0.0575
+     2        1.1299            -nan     0.1000    0.0462
+     3        1.0419            -nan     0.1000    0.0422
+     4        0.9741            -nan     0.1000    0.0320
+     5        0.9112            -nan     0.1000    0.0299
+     6        0.8619            -nan     0.1000    0.0233
+     7        0.8139            -nan     0.1000    0.0229
+     8        0.7713            -nan     0.1000    0.0193
+     9        0.7379            -nan     0.1000    0.0148
+    10        0.7062            -nan     0.1000    0.0146
+    20        0.4935            -nan     0.1000    0.0061
+    40        0.3363            -nan     0.1000    0.0015
+    60        0.2782            -nan     0.1000    0.0010
+    80        0.2439            -nan     0.1000   -0.0002
+   100        0.2212            -nan     0.1000   -0.0009
+   120        0.2043            -nan     0.1000   -0.0005
+   140        0.1860            -nan     0.1000   -0.0003
+   160        0.1746            -nan     0.1000   -0.0002
+   180        0.1636            -nan     0.1000   -0.0001
+   200        0.1517            -nan     0.1000   -0.0001
+   220        0.1405            -nan     0.1000   -0.0003
+   240        0.1317            -nan     0.1000   -0.0001
+   250        0.1267            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2794            -nan     0.1000    0.0303
+     2        1.2246            -nan     0.1000    0.0277
+     3        1.1786            -nan     0.1000    0.0222
+     4        1.1387            -nan     0.1000    0.0198
+     5        1.0986            -nan     0.1000    0.0198
+     6        1.0623            -nan     0.1000    0.0157
+     7        1.0311            -nan     0.1000    0.0148
+     8        1.0021            -nan     0.1000    0.0129
+     9        0.9761            -nan     0.1000    0.0128
+    10        0.9495            -nan     0.1000    0.0126
+    20        0.7779            -nan     0.1000    0.0048
+    40        0.5967            -nan     0.1000    0.0022
+    60        0.5053            -nan     0.1000    0.0016
+    80        0.4498            -nan     0.1000    0.0010
+   100        0.4117            -nan     0.1000    0.0006
+   120        0.3864            -nan     0.1000    0.0009
+   140        0.3642            -nan     0.1000    0.0002
+   160        0.3490            -nan     0.1000    0.0004
+   180        0.3341            -nan     0.1000   -0.0001
+   200        0.3228            -nan     0.1000    0.0000
+   220        0.3145            -nan     0.1000   -0.0000
+   240        0.3061            -nan     0.1000    0.0001
+   250        0.3027            -nan     0.1000    0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2483            -nan     0.1000    0.0444
+     2        1.1782            -nan     0.1000    0.0347
+     3        1.1140            -nan     0.1000    0.0309
+     4        1.0550            -nan     0.1000    0.0275
+     5        1.0051            -nan     0.1000    0.0235
+     6        0.9636            -nan     0.1000    0.0198
+     7        0.9258            -nan     0.1000    0.0182
+     8        0.8934            -nan     0.1000    0.0150
+     9        0.8612            -nan     0.1000    0.0150
+    10        0.8360            -nan     0.1000    0.0124
+    20        0.6347            -nan     0.1000    0.0065
+    40        0.4511            -nan     0.1000    0.0018
+    60        0.3748            -nan     0.1000    0.0007
+    80        0.3372            -nan     0.1000    0.0006
+   100        0.3109            -nan     0.1000    0.0001
+   120        0.2925            -nan     0.1000    0.0002
+   140        0.2785            -nan     0.1000   -0.0000
+   160        0.2641            -nan     0.1000   -0.0001
+   180        0.2536            -nan     0.1000   -0.0002
+   200        0.2429            -nan     0.1000   -0.0001
+   220        0.2360            -nan     0.1000    0.0003
+   240        0.2291            -nan     0.1000   -0.0003
+   250        0.2262            -nan     0.1000    0.0001
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2440            -nan     0.1000    0.0458
+     2        1.1517            -nan     0.1000    0.0443
+     3        1.0845            -nan     0.1000    0.0319
+     4        1.0185            -nan     0.1000    0.0309
+     5        0.9661            -nan     0.1000    0.0255
+     6        0.9196            -nan     0.1000    0.0219
+     7        0.8787            -nan     0.1000    0.0198
+     8        0.8408            -nan     0.1000    0.0182
+     9        0.8049            -nan     0.1000    0.0172
+    10        0.7749            -nan     0.1000    0.0138
+    20        0.5722            -nan     0.1000    0.0069
+    40        0.3905            -nan     0.1000    0.0019
+    60        0.3230            -nan     0.1000    0.0008
+    80        0.2885            -nan     0.1000    0.0004
+   100        0.2666            -nan     0.1000   -0.0001
+   120        0.2524            -nan     0.1000   -0.0003
+   140        0.2368            -nan     0.1000   -0.0003
+   160        0.2259            -nan     0.1000   -0.0003
+   180        0.2156            -nan     0.1000   -0.0003
+   200        0.2042            -nan     0.1000    0.0001
+   220        0.1955            -nan     0.1000   -0.0001
+   240        0.1890            -nan     0.1000    0.0001
+   250        0.1853            -nan     0.1000   -0.0003
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2278            -nan     0.1000    0.0550
+     2        1.1409            -nan     0.1000    0.0411
+     3        1.0695            -nan     0.1000    0.0342
+     4        0.9953            -nan     0.1000    0.0348
+     5        0.9360            -nan     0.1000    0.0281
+     6        0.8845            -nan     0.1000    0.0249
+     7        0.8413            -nan     0.1000    0.0201
+     8        0.8019            -nan     0.1000    0.0190
+     9        0.7671            -nan     0.1000    0.0160
+    10        0.7350            -nan     0.1000    0.0151
+    20        0.5253            -nan     0.1000    0.0111
+    40        0.3603            -nan     0.1000    0.0010
+    60        0.2945            -nan     0.1000   -0.0003
+    80        0.2632            -nan     0.1000   -0.0002
+   100        0.2399            -nan     0.1000   -0.0001
+   120        0.2223            -nan     0.1000   -0.0002
+   140        0.2053            -nan     0.1000   -0.0001
+   160        0.1931            -nan     0.1000   -0.0004
+   180        0.1822            -nan     0.1000   -0.0004
+   200        0.1741            -nan     0.1000   -0.0005
+   220        0.1651            -nan     0.1000   -0.0002
+   240        0.1579            -nan     0.1000   -0.0001
+   250        0.1539            -nan     0.1000   -0.0000
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2303            -nan     0.1000    0.0536
+     2        1.1335            -nan     0.1000    0.0472
+     3        1.0480            -nan     0.1000    0.0411
+     4        0.9790            -nan     0.1000    0.0338
+     5        0.9200            -nan     0.1000    0.0269
+     6        0.8683            -nan     0.1000    0.0246
+     7        0.8241            -nan     0.1000    0.0206
+     8        0.7813            -nan     0.1000    0.0202
+     9        0.7480            -nan     0.1000    0.0161
+    10        0.7178            -nan     0.1000    0.0142
+    20        0.5055            -nan     0.1000    0.0067
+    40        0.3404            -nan     0.1000    0.0015
+    60        0.2760            -nan     0.1000    0.0005
+    80        0.2444            -nan     0.1000   -0.0005
+   100        0.2194            -nan     0.1000   -0.0002
+   120        0.2005            -nan     0.1000   -0.0002
+   140        0.1843            -nan     0.1000   -0.0006
+   160        0.1722            -nan     0.1000   -0.0003
+   180        0.1592            -nan     0.1000   -0.0004
+   200        0.1477            -nan     0.1000   -0.0000
+   220        0.1377            -nan     0.1000   -0.0002
+   240        0.1297            -nan     0.1000   -0.0001
+   250        0.1265            -nan     0.1000   -0.0002
+
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.2285            -nan     0.1000    0.0570
+     2        1.1402            -nan     0.1000    0.0417
+     3        1.0619            -nan     0.1000    0.0390
+     4        0.9958            -nan     0.1000    0.0329
+     5        0.9347            -nan     0.1000    0.0293
+     6        0.8878            -nan     0.1000    0.0230
+     7        0.8489            -nan     0.1000    0.0192
+     8        0.8086            -nan     0.1000    0.0190
+     9        0.7718            -nan     0.1000    0.0171
+    10        0.7396            -nan     0.1000    0.0151
+    20        0.5292            -nan     0.1000    0.0090
+    40        0.3602            -nan     0.1000    0.0017
+    60        0.3024            -nan     0.1000    0.0003
+    80        0.2720            -nan     0.1000    0.0001
+   100        0.2531            -nan     0.1000   -0.0007
+   120        0.2375            -nan     0.1000   -0.0004
+   140        0.2229            -nan     0.1000    0.0004
+   160        0.2104            -nan     0.1000   -0.0002
+   180        0.1998            -nan     0.1000   -0.0001
+   200        0.1893            -nan     0.1000    0.0000
+   220        0.1819            -nan     0.1000   -0.0002
+   240        0.1742            -nan     0.1000   -0.0002
+   250        0.1693            -nan     0.1000   -0.0002</code></pre>
+</div>
+</div>
+<p>Se entreno el modelo, con los 4 modelos mas utilizados</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(models) <span class="ot">&lt;-</span> methods </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">resamples</span>(models) </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(results) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+summary.resamples(object = results)
+
+Models: rf, svmRadial, knn, gbm 
+Number of resamples: 5 
+
+Accuracy 
+               Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA's
+rf        0.9375000 0.9443691 0.9497965 0.9486701 0.9524457 0.9592391    0
+svmRadial 0.9144022 0.9293478 0.9294437 0.9291133 0.9335142 0.9388587    0
+knn       0.8968792 0.8994565 0.9009498 0.9044028 0.9103261 0.9144022    0
+gbm       0.9402174 0.9442935 0.9511533 0.9489385 0.9538043 0.9552239    0
+
+Kappa 
+               Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA's
+rf        0.8680057 0.8828194 0.8945004 0.8919135 0.9001163 0.9141257    0
+svmRadial 0.8199916 0.8503670 0.8509704 0.8503147 0.8594480 0.8707966    0
+knn       0.7844764 0.7884335 0.7893354 0.7983825 0.8094581 0.8202094    0
+gbm       0.8734367 0.8827096 0.8975409 0.8926848 0.9032627 0.9064739    0</code></pre>
+</div>
+</div>
+<p>Resumen estadístico del Accuracy y Kappa de cada modelo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dotplot</span>(results) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="r_spam_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como se observa en la gráfica, tanto el rf como el gbm tienes excelentes resultados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> models[[<span class="st">"rf"</span>]] </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(best_model, <span class="at">newdata =</span> testTransformed) </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>cm <span class="ot">=</span> <span class="fu">confusionMatrix</span>(predictions, testTransformed<span class="sc">$</span>type) </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>cm</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction nonspam spam
+   nonspam     541   29
+   spam         16  333
+                                         
+               Accuracy : 0.951          
+                 95% CI : (0.935, 0.9641)
+    No Information Rate : 0.6061         
+    P-Value [Acc &gt; NIR] : &lt; 2e-16        
+                                         
+                  Kappa : 0.8968         
+                                         
+ Mcnemar's Test P-Value : 0.07364        
+                                         
+            Sensitivity : 0.9713         
+            Specificity : 0.9199         
+         Pos Pred Value : 0.9491         
+         Neg Pred Value : 0.9542         
+             Prevalence : 0.6061         
+         Detection Rate : 0.5887         
+   Detection Prevalence : 0.6202         
+      Balanced Accuracy : 0.9456         
+                                         
+       'Positive' Class : nonspam        
+                                         </code></pre>
+</div>
+</div>
+<p>En los datos de prueba, se obtuvo excelentes resultados, a la hora de clasificar entre spam y no spam. Con un 95% de Accuracy</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( <span class="fu">as.data.frame</span>(cm<span class="sc">$</span>table), <span class="fu">aes</span>(<span class="at">x =</span> Reference, <span class="at">y =</span> Prediction, <span class="at">fill =</span> Freq)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Freq), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"lightblue"</span>, <span class="at">high =</span> <span class="st">"lightyellow"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Matriz de Confusión en test"</span>, <span class="at">x =</span> <span class="st">"Clase Real"</span>, <span class="at">y =</span> <span class="st">"Clase Predicha"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="r_spam_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Gráfico de la matriz de confusión en el test y se observa que el modelo tiene buen rendimiento al clasificar el correo spam</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>importance <span class="ot">&lt;-</span> <span class="fu">varImp</span>(best_model, <span class="at">scale =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(importance, <span class="at">top =</span> <span class="dv">5</span>)  </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="r_spam_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El gráfico muestra el top 5 de las variables mas importantes dentro de las 57 que existen.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
