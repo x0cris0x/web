@@ -33,7 +33,7 @@ jobs:
         timeout_minutes: 10    # Tiempo máximo que puede tardar el notebook
         max_attempts: 3        # Intentará 3 veces en total si falla
         retry_wait_seconds: 300 # Esperará 300 segundos (5 minutos) entre intentos
-        command: jupyter nbconvert --to html --execute ./p_web_ts/p_web_ts_api.ipynb --output ./p_web_ts/p_web_ts_api.html
+        command: jupyter nbconvert --to html --execute ./p_web_ts/p_web_ts_api.ipynb --output p_web_ts_api.html
         
 
     # 5. Configurar Git y subir los cambios al repo
@@ -44,7 +44,7 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
         # Añadir el archivo generado
-        git add ./p_web_ts/p_web_ts_api.html
+        git add .
         
         # Hacer el commit solo si hay cambios
         git commit -m "Update p_web_ts_api.html with latest execution [skip ci]" || echo "No hay cambios"        
