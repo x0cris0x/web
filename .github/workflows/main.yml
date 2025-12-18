@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 23 * * *' # 19:00 Bolivia (UTC-4)
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,27 +27,29 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r ./p_web_ts/requirements.txt
 
-# 4. Ejecutar el notebook con reintentos
+    # 4. Instalar Quarto
+    - name: Install Quarto
+      uses: quarto-dev/quarto-actions/setup@v2
+
+    # 5. Ejecutar el notebook y generar HTML crudo
     - name: Execute and Export Notebook
       uses: nick-fields/retry@v3
       with:
-        timeout_minutes: 10    # Tiempo máximo que puede tardar el notebook
-        max_attempts: 3        # Intentará 3 veces en total si falla
-        retry_wait_seconds: 300 # Esperará 300 segundos (5 minutos) entre intentos
+        timeout_minutes: 10
+        max_attempts: 3
+        retry_wait_seconds: 300
         command: jupyter nbconvert --to html --execute ./p_web_ts/p_web_ts_api.ipynb --output p_web_ts_api.html
-        
 
-    # 5. Configurar Git y subir los cambios al repo
+    # 6. Renderizar el sitio completo con Quarto (aplica el estilo)
+    - name: Render Quarto site
+      run: quarto render
+
+    # 7. Commit y push de los cambios
     - name: Commit and Push changes
       run: |
-        # Configurar el usuario (puedes usar el bot de GitHub)
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        
-        # Añadir el archivo generado
+
         git add .
-        
-        # Hacer el commit solo si hay cambios
-        git commit -m "Update p_web_ts_api.html with latest execution [skip ci]" || echo "No hay cambios"        
-        # Subir los cambios
+        git commit -m "Update site with latest notebook execution [skip ci]" || echo "No hay cambios"
         git push
